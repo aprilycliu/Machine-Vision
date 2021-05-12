@@ -1,3 +1,6 @@
+from skimage.io import imread  
+import numpy as np
+
 def run_length_encode(data):
     """
     Apply RLE on an array of data, return [values, repetitions].
@@ -31,7 +34,7 @@ def run_length_decode(values, repetitions):
   
   original_bytes = np.product(grayscale_image.shape)
 
-from skimage.io import imread  
+
 original_image = imread("building.png")
 grayscale_image = original_image[:, :, 0]
 
