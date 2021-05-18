@@ -45,8 +45,8 @@ def template_matching(src, temp, method = 'mse'):
     if method == 'mse':
         for dy in tqdm(range(0, h - ht)):
             for dx in range(0, w - wt):
-            
-                diff = mse(src[dy:dy + ht, dx:dx + wt], temp)
+                image_patch = src[dy:dy + ht, dx:dx + wt]
+                diff = np.mean((image_patch - temp) ** 2) #mse
                 score[dy, dx] = diff
                 pt = np.unravel_index(score.argmin(), score.shape)
                
@@ -56,9 +56,13 @@ def template_matching(src, temp, method = 'mse'):
         
                 diff = np.corrcoef(src[dy:dy + ht, dx:dx + wt].flat, temp.flat)[0, 1]
                 score[dy, dx] = diff
-                pt = np.unravel_index(score.argmax(), score.shape)
+               # pt = np.unravel_index(score.argmax(), score.shape)
+                pt =np.where(corr_result == corr_result.max())   #same as line 59     
+                cv2.rectangle(img, (pt[1], pt[0]), (pt[1] + wt, pt[0] + ht), (0, 0, 200), 3)
+                cv2.imwrite('output.png', img)
     
-    return(pt[1], pt[0])
+    
+    return(pt[1], pt[0]) 
 
 def main(method = 'corr'):
 
