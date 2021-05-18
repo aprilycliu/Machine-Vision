@@ -1,3 +1,5 @@
+#run length encoding
+
 from skimage.io import imread  
 import numpy as np
 
