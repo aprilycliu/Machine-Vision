@@ -73,4 +73,5 @@ def main(method = 'corr'):
 
     cv2.rectangle(img, (pt[0], pt[1]), (pt[0] + w, pt[1] + h), (0, 0, 200), 3)
     cv2.imwrite('output.png', img)
+    
 main('corr')
